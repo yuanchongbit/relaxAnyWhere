@@ -3,6 +3,7 @@ import './utils/weapp-adapter'
 import MainMenu from './js/main-menu'
 import TetrisScene from './js/tetris-scene'
 import MinesweeperScene from './js/minesweeper-scene'
+import SudokuScene from './js/sudoku-scene'
 
 // 获取全局 canvas
 const ctx = canvas.getContext('2d')
@@ -15,9 +16,10 @@ const gameState = {
 
 // 初始化场景
 function init() {
-  gameState.scenes.menu = new MainMenu(startTetris, startMinesweeper)
+  gameState.scenes.menu = new MainMenu(startTetris, startMinesweeper, startSudoku)
   gameState.scenes.tetris = new TetrisScene(backToMenu)
   gameState.scenes.minesweeper = new MinesweeperScene(backToMenu)
+  gameState.scenes.sudoku = new SudokuScene(backToMenu)
 
   // 默认进入主菜单
   switchScene('menu')
@@ -37,6 +39,10 @@ function startTetris() {
 
 function startMinesweeper() {
   switchScene('minesweeper')
+}
+
+function startSudoku() {
+  switchScene('sudoku')
 }
 
 function backToMenu() {

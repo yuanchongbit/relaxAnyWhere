@@ -1,7 +1,8 @@
 export default class MainMenu {
-  constructor(startTetrisCb, startMinesweeperCb) {
+  constructor(startTetrisCb, startMinesweeperCb, startSudokuCb) {
     this.startTetris = startTetrisCb
     this.startMinesweeper = startMinesweeperCb
+    this.startSudoku = startSudokuCb
     
     const info = wx.getSystemInfoSync()
     this.width = info.windowWidth
@@ -9,8 +10,9 @@ export default class MainMenu {
     this.dpr = info.pixelRatio
 
     // 按钮区域 (逻辑坐标)
-    this.btnTetris = { x: this.width / 2 - 80, y: this.height / 2 - 60, w: 160, h: 50 }
-    this.btnMine = { x: this.width / 2 - 80, y: this.height / 2 + 20, w: 160, h: 50 }
+    this.btnTetris = { x: this.width / 2 - 80, y: this.height / 2 - 100, w: 160, h: 50 }
+    this.btnMine = { x: this.width / 2 - 80, y: this.height / 2 - 20, w: 160, h: 50 }
+    this.btnSudoku = { x: this.width / 2 - 80, y: this.height / 2 + 60, w: 160, h: 50 }
   }
 
   reset() {}
@@ -31,6 +33,9 @@ export default class MainMenu {
     
     // 扫雷按钮
     this.drawButton(ctx, this.btnMine, 'Minesweeper', '#333333')
+    
+    // 数独按钮
+    this.drawButton(ctx, this.btnSudoku, 'Sudoku', '#333333')
   }
 
   drawButton(ctx, btn, text, color) {
@@ -55,6 +60,8 @@ export default class MainMenu {
       this.startTetris()
     } else if (this.isInside(x, y, this.btnMine)) {
       this.startMinesweeper()
+    } else if (this.isInside(x, y, this.btnSudoku)) {
+      this.startSudoku()
     }
   }
 
